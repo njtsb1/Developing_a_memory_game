@@ -1,0 +1,58 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    background-color: black;
+}
+
+.memory-game {
+    height: 640px;
+    width: 640px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px; /* user perspective on the z-axis, the larger, the greater the perspective effect */
+}
+
+.card {
+    height: calc( 33.333% - 10px);
+    width: calc(25% - 10px);
+    margin: 5px;
+    position: relative;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    cursor: pointer;
+    transform: scale(1);
+    transform-style: preserve-3d; /* adds 3d perspective, so the element is not flattened in the plane */
+    transition: transform .9s; /* adds movement effect to card flip */
+}
+
+.card:active{
+    transform: scale(0.97);
+    transition: transform .2s;
+}
+
+.card-front,
+.card-back {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  border-radius: 5px;
+  background: purple;
+  backface-visibility: hidden; /* every element has a front and a back (in contrast, like a mirror.) this property removes the back */
+}
+
+.card-front {
+    transform: rotateY(180deg); /* before, the back side appeared transparent, because both images have absolute position, when rotating on the Y axis, they had the back sides turned */
+}
+
+/* flip card animation */
+
+.card.flip {
+    transform: rotateY(180deg);
+}
